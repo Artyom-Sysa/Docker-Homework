@@ -1,5 +1,6 @@
 import * as Amqp from 'amqp-ts'
 import Web3 from 'web3'
+import express from 'express'
 
 interface Message {
   number: number
@@ -55,3 +56,14 @@ connection.completeConfiguration().then(() => {
     })
   }, fetchInterval)
 })
+
+const app = express();
+
+app.get("/health", (req, res) => {
+  res.send(true);
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on PORT ${PORT}`);
+});

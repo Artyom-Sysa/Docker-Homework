@@ -1,6 +1,7 @@
 import * as Amqp from 'amqp-ts'
 import { Client } from 'pg'
 import redis from 'redis'
+import express from 'express'
 
 interface Message {
   number: number
@@ -93,4 +94,14 @@ pgClient.connect().then(r => {
 })
 
 
+const app = express();
+
+app.get("/health", (req, res) => {
+  res.send(true);
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on PORT ${PORT}`);
+});
 

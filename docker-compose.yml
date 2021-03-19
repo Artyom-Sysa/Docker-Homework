@@ -69,12 +69,18 @@ services:
     build: ./publisher
     environment:
       <<: *rabbit-mq_variables
-      FETCH_BLOCKS_INTERVAL_MS: 1000
-      DATA_SOURCE_URL: 'https://cloudflare-eth.com'
+      FETCH_BLOCKS_INTERVAL_MS: 5000
+    env_file:
+      - configs/publisher/.env.publisher
     depends_on:
       - rabbit-mq
       - postgres
     restart: always
+    healthcheck:
+      test: curl -sS http://127.0.0.1:3000/health || echo 1
+      interval: 10s
+      timeout: 30s
+      retries: 3
     networks:
       local:
         ipv4_address: 10.1.0.104
@@ -89,6 +95,11 @@ services:
       - postgres
       - redis
     restart: always
+    healthcheck:
+      test: curl -sS http://127.0.0.1:3000/health || echo 1
+      interval: 10s
+      timeout: 30s
+      retries: 3
     networks:
       local:
         ipv4_address: 10.1.0.105
