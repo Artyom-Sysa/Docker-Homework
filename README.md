@@ -70,7 +70,7 @@ Implementation of homework of docker lessons
     ```
 
 #### Publisher & Consumer healthchecks:
-Publisher and consumer services have `/helth` api by path `127.0.0.1:3000/helth`. 
+Publisher and consumer services have `/health` api by path `127.0.0.1:3000/helth`. 
 For checking health of service you can call this api with concrete ip of this service
 
 All general configuration of environment variables between some services you can set one time (section of general vars in docker-compose file) and it would work for all services which use it
