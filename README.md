@@ -85,5 +85,5 @@ All general configuration of environment variables between some services you can
 
 ### Run:
 ```
-docker-compose up
+$ docker-compose up
 ```
